@@ -1,7 +1,5 @@
-/* eslint-disable react/jsx-props-no-spreading */
-/* eslint-disable react/prop-types */
-/* eslint-disable import/no-extraneous-dependencies */
 import { Link, useMatch, useResolvedPath } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 export default function Navbar() {
   return (
@@ -20,7 +18,14 @@ export default function Navbar() {
 function CustomLink({ to, children, ...props }) {
   const resolvedPath = useResolvedPath(to);
   const isActive = useMatch({ path: resolvedPath.pathname, end: true });
-
+  CustomLink.propTypes = {
+    to: '',
+    children: '',
+  };
+  CustomLink.propTypes = {
+    to: PropTypes.string.isRequired,
+    children: PropTypes.string.isRequired,
+  };
   return (
     <li className={isActive ? 'active' : ''}>
       <Link to={to} {...props}>
