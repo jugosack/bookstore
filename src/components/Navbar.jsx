@@ -1,4 +1,7 @@
-import { Link, useMatch, useResolvedPath } from 'react-router-dom';
+import {
+  Outlet,
+  Link, useMatch, useResolvedPath,
+} from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 export default function Navbar() {
@@ -11,6 +14,7 @@ export default function Navbar() {
         <CustomLink to="/">BOOKS</CustomLink>
         <CustomLink to="/categories">CATEGORIES</CustomLink>
       </ul>
+      <Outlet />
     </nav>
   );
 }
