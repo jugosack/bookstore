@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
-// import RemoveButton from './removeButton';
 import { removeBook } from '../redux/books/booksSlice';
 
 function Book(props) {
@@ -29,7 +28,6 @@ function Book(props) {
         <li>
           {author}
         </li>
-        {/* <RemoveButton onClick={handleRemove} type="submit" /> */}
         <button onClick={handleRemove} type="submit">
           Remove
         </button>
