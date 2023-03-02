@@ -11,7 +11,7 @@ import {
 
 const Books = () => {
   const dispatch = useDispatch();
-  const books = useSelector(selectAllBooks);
+  const bookArr = useSelector(selectAllBooks);
   const booksStatus = useSelector(getBooksStatus);
   const booksError = useSelector(getBooksError);
 
@@ -25,7 +25,7 @@ const Books = () => {
   if (booksStatus === 'loading') {
     content = <p>Loading...</p>;
   } else if (booksStatus === 'succeeded') {
-    content = books.map((book) => (
+    content = bookArr.map((book) => (
       <Book
         key={book.item_id}
         id={book.item_id}

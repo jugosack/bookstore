@@ -6,7 +6,7 @@ import axios from 'axios';
 const URL = 'https://us-central1-bookstore-api-e63c8.cloudfunctions.net/bookstoreApi/apps/G80IeE8IQkQaLBozJ0nT/books';
 
 const initialState = {
-  books: [],
+  bookArray: [],
   status: 'idle', // 'idle' | 'loading' | 'succeeded' | 'failed'
   error: null,
 };
@@ -30,11 +30,11 @@ export const bookSlice = createSlice({
   reducers: {
     addBook: (state, action) => ({
       ...state,
-      books: [...state.books, action.payload],
+      bookArray: [...state.bookArray, action.payload],
     }),
     removeBook: (state, action) => ({
       ...state,
-      books: state.books.filter((book) => book.item_id !== action.payload),
+      bookArray: state.bookArray.filter((book) => book.item_id !== action.payload),
     }),
   },
   extraReducers: {
@@ -43,16 +43,16 @@ export const bookSlice = createSlice({
     },
     [fetchBooks.fulfilled]: (state, action) => {
       state.status = 'succeeded';
-      state.books = action.payload;
+      state.bookArray = action.payload;
     },
     [fetchBooks.rejected]: (state) => {
       state.status = 'failed';
-      state.books = [];
+      state.bookArray = [];
     },
   },
 });
 
-export const selectAllBooks = (state) => state.books.books;
+export const selectAllBooks = (state) => state.books.bookArray;
 export const getBooksStatus = (state) => state.books.status;
 export const getBooksError = (state) => state.books.error;
 
