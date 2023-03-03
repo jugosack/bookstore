@@ -6,55 +6,89 @@ import axios from 'axios';
 const URL = 'https://us-central1-bookstore-api-e63c8.cloudfunctions.net/bookstoreApi/apps/G80IeE8IQkQaLBozJ0nT/books';
 
 const initialState = {
-  bookArray: [],
-  status: 'idle', // 'idle' | 'loading' | 'succeeded' | 'failed'
+  books: [],
+  ifSucceed: false,
+  isLoading: false,
   error: null,
 };
 
-export const fetchBooks = createAsyncThunk(
+const headers = {
+  headers: {
+    'content-type': 'application/json',
+  },
+};
+
+const fetchBooks = createAsyncThunk(
   'books/fetchBooks',
   async () => {
     try {
-      const response = await axios.get(URL);
-      return [...response.data];
+      const { data } = await axios.get(URL);
+      return data;
     } catch (err) {
       return err.message;
     }
   },
 );
+const addBook = createAsyncThunk('books/addBooks', async (book) => {
+  const data = JSON.stringify(book);
+  try {
+    const response = await axios.post(URL, data, headers);
+    return response.data;
+  } catch (error) {
+    return error;
+  }
+});
 
-export const bookSlice = createSlice({
+const removeBook = createAsyncThunk('books/removeBook', async (id) => {
+  const data = JSON.stringify({ item_id: id });
+  try {
+    const response = await axios.delete(URL + id, data, headers);
+    return response.data;
+  } catch (error) {
+    return error;
+  }
+});
 
+const bookSlice = createSlice({
   name: 'books',
   initialState,
-  reducers: {
-    addBook: (state, action) => ({
-      ...state,
-      bookArray: [...state.bookArray, action.payload],
-    }),
-    removeBook: (state, action) => ({
-      ...state,
-      bookArray: state.bookArray.filter((book) => book.item_id !== action.payload),
-    }),
-  },
+  reducers: {},
   extraReducers: {
     [fetchBooks.pending]: (state) => {
-      state.status = 'loading';
+      state.isLoading = true;
     },
     [fetchBooks.fulfilled]: (state, action) => {
-      state.status = 'succeeded';
-      state.bookArray = action.payload;
+      state.isLoading = false;
+      state.ifSucceed = true;
+      state.books = action.payload;
     },
     [fetchBooks.rejected]: (state) => {
-      state.status = 'failed';
-      state.bookArray = [];
+      state.isLoading = false;
+    },
+
+    [addBook.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [addBook.fulfilled]: (state) => {
+      state.isLoading = false;
+      state.ifSucceed = false;
+    },
+    [addBook.rejected]: (state) => {
+      state.isLoading = false;
+    },
+
+    [removeBook.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [removeBook.fulfilled]: (state) => {
+      state.isLoading = false;
+      state.ifSucceed = false;
+    },
+    [removeBook.rejected]: (state) => {
+      state.isLoading = false;
     },
   },
 });
 
-export const selectAllBooks = (state) => state.books.bookArray;
-export const getBooksStatus = (state) => state.books.status;
-export const getBooksError = (state) => state.books.error;
-
-export const { addBook, removeBook } = bookSlice.actions;
+export { fetchBooks, addBook, removeBook };
 export default bookSlice.reducer;
