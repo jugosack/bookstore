@@ -1,12 +1,12 @@
-/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable no-param-reassign */
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+// eslint-disable-next-line import/no-extraneous-dependencies
 import axios from 'axios';
 
-const URL = 'https://us-central1-bookstore-api-e63c8.cloudfunctions.net/bookstoreApi/apps/G80IeE8IQkQaLBozJ0nT/books';
+const BOOKS_URL = 'https://us-central1-bookstore-api-e63c8.cloudfunctions.net/bookstoreApi/apps/G80IeE8IQkQaLBozJ0nT/books/';
 
 const initialState = {
-  books: [],
+  books: {},
   ifSucceed: false,
   isLoading: false,
   error: null,
@@ -22,17 +22,18 @@ const fetchBooks = createAsyncThunk(
   'books/fetchBooks',
   async () => {
     try {
-      const { data } = await axios.get(URL);
+      const { data } = await axios.get(BOOKS_URL);
       return data;
     } catch (err) {
       return err.message;
     }
   },
 );
+
 const addBook = createAsyncThunk('books/addBooks', async (book) => {
   const data = JSON.stringify(book);
   try {
-    const response = await axios.post(URL, data, headers);
+    const response = await axios.post(BOOKS_URL, data, headers);
     return response.data;
   } catch (error) {
     return error;
@@ -42,14 +43,14 @@ const addBook = createAsyncThunk('books/addBooks', async (book) => {
 const removeBook = createAsyncThunk('books/removeBook', async (id) => {
   const data = JSON.stringify({ item_id: id });
   try {
-    const response = await axios.delete(URL + id, data, headers);
+    const response = await axios.delete(BOOKS_URL + id, data, headers);
     return response.data;
   } catch (error) {
     return error;
   }
 });
 
-const bookSlice = createSlice({
+const booksSlice = createSlice({
   name: 'books',
   initialState,
   reducers: {},
@@ -91,4 +92,5 @@ const bookSlice = createSlice({
 });
 
 export { fetchBooks, addBook, removeBook };
-export default bookSlice.reducer;
+
+export default booksSlice.reducer;
