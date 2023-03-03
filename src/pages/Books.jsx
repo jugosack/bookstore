@@ -1,24 +1,40 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import Book from '../components/Book';
 import Form from '../components/Form';
+import { fetchBooks } from '../redux/books/booksSlice';
 
 const Books = () => {
-  const booksArr2 = useSelector((state) => state.books.bookArray);
+  const dispatch = useDispatch();
+  const ifSucceed = useSelector((store) => (store.books.ifSucceed));
+  const books = useSelector((store) => store.books.books);
+  const isLoading = useSelector((store) => store.books.isLoading);
+
+  useEffect(() => {
+    dispatch(fetchBooks());
+  }, [ifSucceed, dispatch]);
+
+  let content;
+  if (isLoading) {
+    content = <p>Loading...</p>;
+  } else if (ifSucceed) {
+    content = Object.keys(books).map((key) => {
+      const currentBook = books[key][0];
+      return (
+        <Book
+          key={key}
+          id={key}
+          title={currentBook.title}
+          author={currentBook.author}
+        />
+      );
+    });
+  }
 
   return (
     <section>
       <h1>List of books</h1>
-      <ul>
-        {booksArr2.map((book) => (
-          <Book
-            key={book.item_id}
-            id={book.item_id}
-            title={book.title}
-            author={book.author}
-          />
-        ))}
-      </ul>
+      <ul>{content}</ul>
       <Form />
     </section>
   );
