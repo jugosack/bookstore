@@ -1,8 +1,11 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import {
   Outlet,
   Link, useMatch, useResolvedPath,
 } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import './Navbar.css';
+import { FaUser } from 'react-icons/fa';
 
 export default function Navbar() {
   return (
@@ -10,10 +13,11 @@ export default function Navbar() {
       <Link to="/" className="site-title">
         Bookstore CMS
       </Link>
-      <ul>
-        <CustomLink to="/">BOOKS</CustomLink>
-        <CustomLink to="/categories">CATEGORIES</CustomLink>
+      <ul id="ul-page">
+        <CustomLink to="/" className="link-page">BOOKS</CustomLink>
+        <CustomLink to="/categories" className="link-page">CATEGORIES</CustomLink>
       </ul>
+      <div id="user"><FaUser /></div>
       <Outlet />
     </nav>
   );
