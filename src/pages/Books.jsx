@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import Book from '../components/Book';
 import Form from '../components/Form';
 import { fetchBooks } from '../redux/books/booksSlice';
+import './Books.css';
 
 const Books = () => {
   const dispatch = useDispatch();
@@ -32,11 +33,13 @@ const Books = () => {
   }
 
   return (
-    <section>
-      <h1>List of books</h1>
-      <ul>{content}</ul>
+    <>
+      <section>
+        <ul>{content}</ul>
+      </section>
+
       <Form />
-    </section>
+    </>
   );
 };
 

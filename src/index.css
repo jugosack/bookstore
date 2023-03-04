@@ -1,4 +1,14 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:wght@700&display=swap"');
+
 body {
+  margin: 0;
+  padding: 3rem;
+  background: #f3f4f8;
+  font-family: 'Montserrat', sans-serif;
+}
+
+
+/* body {
   margin: 0;
   font-family:
     -apple-system,
@@ -14,9 +24,9 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
+} */
 
-code {
+/* code {
   font-family:
     source-code-pro,
     Menlo,
@@ -24,4 +34,4 @@ code {
     Consolas,
     'Courier New',
     monospace;
-}
+} */

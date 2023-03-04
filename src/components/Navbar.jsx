@@ -1,4 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import {
   Outlet,
   Link, useMatch, useResolvedPath,
@@ -9,17 +8,23 @@ import { FaUser } from 'react-icons/fa';
 
 export default function Navbar() {
   return (
-    <nav className="nav">
-      <Link to="/" className="site-title">
-        Bookstore CMS
-      </Link>
-      <ul id="ul-page">
-        <CustomLink to="/" className="link-page">BOOKS</CustomLink>
-        <CustomLink to="/categories" className="link-page">CATEGORIES</CustomLink>
-      </ul>
-      <div id="user"><FaUser /></div>
-      <Outlet />
-    </nav>
+    <>
+      <nav className="nav">
+        <Link to="/" className="site-title">
+          Bookstore CMS
+        </Link>
+        <ul id="ul-page">
+          <CustomLink to="/" className="link-page">BOOKS</CustomLink>
+          <CustomLink to="/categories" className="link-page">CATEGORIES</CustomLink>
+        </ul>
+        <div id="user_position">
+          <div id="user"><FaUser /></div>
+        </div>
+      </nav>
+      <main>
+        <Outlet />
+      </main>
+    </>
   );
 }
 

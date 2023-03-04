@@ -2,14 +2,13 @@
     background: white;
     height: 4rem;
     display: flex;
-    justify-content: space-between;
-    padding: 1rem 3rem;
+    padding: 1rem 3rem 1rem 3rem;
     align-items: center;
     border-bottom: 1px solid #d5d5d5;
 }
 
 .site-title{
-    font-size: 1.875rem;
+  font-size: 1.875rem;
   letter-spacing: 1.05px;
   font-weight: bold;
   color: #0090ff;
@@ -32,6 +31,10 @@
     padding: 0;
   }
 
+#user_position{
+    margin-left: auto;
+
+}
   #user{
     border: 1px solid lightgray;
     padding: 0.5rem;
@@ -42,4 +45,9 @@
     align-items: center;
     border-radius: 50%;
     color: #0090ff;
+  }
+
+  main{
+    padding: 1rem 3rem;
+    background: #fafafa;
   }

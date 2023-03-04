@@ -1,8 +1,8 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
 import { addBook } from '../redux/books/booksSlice';
+import './Form.css';
 
 const Form = () => {
   const dispatch = useDispatch();
@@ -32,8 +32,8 @@ const Form = () => {
 
   return (
 
-    <section>
-      <h2 className="form-title">ADD NEW BOOK</h2>
+    <section className="form_section">
+      <h3 className="form-title">ADD NEW BOOK</h3>
       <form className="add-form" onSubmit={handleSubmit}>
         <input
           type="text"
@@ -45,13 +45,13 @@ const Form = () => {
         />
         <input
           type="text"
-          placeholder="Author"
+          placeholder="author"
           name="author"
           value={formInputs.author}
           onChange={handleChange}
           required
         />
-        <button type="submit">Add book</button>
+        <button type="submit" id="addbook">Add book</button>
       </form>
 
     </section>
