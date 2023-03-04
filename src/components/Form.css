@@ -1,41 +1,43 @@
-.form-section{
-    border-top: 1px solid lightgrey;
-    
+.form-section {
+  border-top: 1px solid lightgrey;
 }
 
-.form-title{
+.form-title {
   color: gray;
   text-transform: uppercase;
   margin-top: 3rem;
   border-top: 1px solid lightgrey;
 }
-.add-form{
-    display: flex;
-    flex-wrap: nowrap;
-    column-gap: 2rem; 
+
+.add-form {
+  display: flex;
+  flex-wrap: nowrap;
+  column-gap: 2rem;
 }
+
 input {
-    width: 41.5rem;
-    padding: 0.5rem;
-    font-size: 1.2rem;
-    border-color: white;
-    border-radius: 3px ;
-    border-width: thin;
-    
-  }
-  input::placeholder {
-    opacity: 0.5;
-    color: gray;
-  }
-  
-  #addbook {
+  width: 41.5rem;
+  padding: 0.5rem;
+  font-size: 1.2rem;
+  border-color: white;
+  border-radius: 3px;
+  border-width: thin;
+}
+
+input::placeholder {
+  opacity: 0.5;
+  color: gray;
+}
+
+#addbook {
   width: 11.5rem;
   padding: 0.5rem;
   border-radius: 3px;
   background-color: #0090ff;
-  color:white;
-  font-family: RobotoSlab;
+  color: white;
+
+  /* font-family: RobotoSlab; */
   font-size: 1rem;
   border-width: thin;
   border-color: white;
-  }
+}
